@@ -1,0 +1,23 @@
+<div class="paginate">
+    <ul class="pagination">
+        <!-- when you click a tag or button tag, you must use `{% csrf_token %}` -->
+        {% if objects_list.has_previous %}
+            <li class="link-paginate">
+                <a data-page="{{ objects_list.previous_page_number }}">上一页</a>
+            </li>
+        {% endif %}
+
+        <!--此处并未实现当页数更多是如何合理的展示分页-->
+        {% for pg in objects_list.paginator.page_range %}
+            {% if queryset.number == pg %}
+                <li class="active link-paginate"><a data-page="{{ pg }}">{{ pg }}</a></li>
+            {% else %}
+                <li class="link-paginate"><a data-page="{{ pg }}">{{ pg }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if objects_list.has_next %}
+            <li class="link-paginate"><a data-page="{{ objects_list.next_page_number }}">下一页</a></li>
+        {% endif %}
+    </ul>
+</div>

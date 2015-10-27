@@ -1,0 +1,7 @@
+#table-content      {text-align: center;font-size:85%}
+.form-group           {border-bottom:1px solid #dff0d8; padding:0 0 15px;margin-bottom: 2%;}
+
+.label-box        {font-weight:normal; font-size: 90%; margin: 0 0 1em 2em}
+.input-box        {border:1px solid #dff0d8;margin-left: 1em}
+select.input-box            {width: 12%; height: 25px}
+.btn.btn-default.btn-sm     {background-color: #dff0d8; margin-left:2em}
