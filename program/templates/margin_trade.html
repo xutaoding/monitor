@@ -3,22 +3,17 @@
 <!--{% load program_extra %}-->
 
 {% block style %}
-    <!--{% load static %}-->
+    {% load static %}
     <link href="{% static 'css/base.css' %}" type="text/css" rel="stylesheet">
 {% endblock %}
+
+{% block title %} 大宗交易 {% endblock %}
 
 {% block navigation %}
     {% include "base.html" %}
 {% endblock %}
 
-{% block header %}
-    <label>权益类与债券类大宗交易</label>
-<div><a href="#" rel="drevil">
-    <span class="glyphicon glyphicon-shopping-cart"> </span> dddd
-</a></div>
-{% endblock %}
-
-
+{% block header %} <label>权益类与债券类大宗交易</label> {% endblock %}
 
 {% block form %}
     <!--<form class="form-group" action="" method="GET">-->

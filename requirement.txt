@@ -1,2 +1,2 @@
 dajngo==1.8.5
-pagination==1.0.7
+# pagination==1.0.7

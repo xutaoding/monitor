@@ -1,10 +1,10 @@
-$(function(){
-        $("[rel=drevil]").popover({
+﻿$(function(){
+        $("[data-toggle='popover']").popover({
             trigger:'manual',
             placement : 'bottom', //placement of the popover. also can use top, bottom, left or right
-            title : '<div style="text-align:center; color:red; text-decoration:underline; font-size:14px;"> Muah ha ha</div>', //this is the top title bar of the popover. add some basic css
+            title : '', //this is the top title bar of the popover. add some basic css
             html: 'true', //needed to show html of course
-            content : '<a href="http://www.baidu.com">123456</a>', //this is the content of the html box. add the image here or anything you want really.
+            content : '<div><a>大宗交易查询</a></div><div><a>大宗交易修改</a></div>', //this is the content of the html box. add the image here or anything you want really.
             animation: false
         }).on("mouseenter", function () {
                     var _this = this;

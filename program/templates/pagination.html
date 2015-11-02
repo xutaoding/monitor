@@ -9,7 +9,7 @@
 
         <!--此处并未实现当页数更多是如何合理的展示分页-->
         {% for pg in objects_list.paginator.page_range %}
-            {% if queryset.number == pg %}
+            {% if objects_list.number == pg %}
                 <li class="active link-paginate"><a data-page="{{ pg }}">{{ pg }}</a></li>
             {% else %}
                 <li class="link-paginate"><a data-page="{{ pg }}">{{ pg }}</a></li>
