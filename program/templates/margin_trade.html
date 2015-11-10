@@ -39,7 +39,7 @@
 
 
 {% block content %}
-    <table id="table-content" class="table table-striped table-bordered table-hover">
+    <table id="table-content" class="table table-striped table-condensed table-bordered table-hover">
         <thead>
             <tr class="bg-success">
                 <td>序号</td>
@@ -54,6 +54,7 @@
                 <td>卖出营业部</td>
                 <td>货币</td>
                 <td>创建时间</td>
+                <td>备注</td>
             </tr>
         </thead>
         <tbody>
@@ -71,6 +72,15 @@
             <td>{{ item.sale }}</td>
             <td>{{ item.c.en }}</td>
             <td>{{ item.crt|date:'Y-m-d H:i:s.u'|slice:':-3' }}</td>
+            <td>
+                <div class="btn-group btn-group-xs">
+                    <button type="button" class="btn btn-info">修改</button>
+                </div>
+                <div class="btn-group btn-group-xs">
+                    <button type="button" class="btn btn-danger">删除</button>
+                </div>
+                {% include "modal.html" %}
+            </td>
         </tr>
         {% endfor %}
         </tbody>
