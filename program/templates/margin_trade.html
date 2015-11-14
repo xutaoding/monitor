@@ -90,7 +90,7 @@
         </tbody>
     </table>
 
-    <-- Update modal -->
+    <!-- Update modal -->
     <div class="modal fade" id="update" tabindex="-1" role="dialog"
          aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -99,12 +99,37 @@
                     <button type="button" class="close" data-dismiss="modal"
                             aria-hidden="true">&times;
                     </button>
-                    <h5 id="myModalLabel" style="text-align:center">数据</h5>
+                    <h4 id="myModalLabel" style="text-align:center">数据修改</h4>
                 </div>
 
                 <div class="modal-body">
-                    <form class="form-horizontal" role="form">
+                    <div class="btn-group" style="margin-left: 30%">
+                        <span class="glyphicon glyphicon-plus"></span>添加修改选项
+                    </div>
 
+                    <div class="btn-group update">
+                        <button type="button" class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown">
+                            修改项 <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="secu"><a>股票代码</a></li>
+                            <li class="divider"></li>
+                            <li class="y"><a>交易日期</a></li>
+                            <li class="divider"></li>
+                            <li class="price"><a>成交价</a></li>
+                            <li class="divider"></li>
+                            <li class="volu"><a>成交量</a></li>
+                            <li class="divider"></li>
+                            <li class="amou"><a>成交额</a></li>
+                            <li class="divider"></li>
+                            <li class="buy"><a>买入营业部</a></li>
+                            <li class="divider"></li>
+                            <li class="sale"><a>卖出营业部</a></li>
+                        </ul>
+                    </div>
+
+                    <form class="form-horizontal update" role="form" style="margin-top: 15px">
+                        <input type="hidden" class="form-control data-id" name="id" value="">
                     </form>
                 </div>
 
