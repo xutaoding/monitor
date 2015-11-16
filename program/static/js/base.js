@@ -31,11 +31,16 @@ $(function(){
             maps = {'secu': '股票代码', 'y': '交易日期', 'price': '成交价', 'volu': '成交量', 'amou': '成交额',
                    'disc': 'disc', 'ratio': 'ratio', 'buy': '买入营业部', 'sale': '卖出营业部', 'c.en': '货币'}
 
+        var minus = '<button type="button" class="btn btn-danger btn-xs remove" style="margin-top: 6px">' +
+                    '<span class="glyphicon glyphicon-minus"></span></button>'
         var html = '<div class="form-group data-check"><label class="col-sm-3 control-label">'
-                    + maps[key] +'：</label><div class="col-sm-9"><input type="text" class="form-control input-xs"'
-                    + ' name="' + key + '" value="' + objects_modal[key] + '"></div></div>';
+                    + maps[key] +'：</label><div class="col-sm-8"><input type="text" class="form-control input-xs"'
+                    + ' name="' + key + '" value="' + objects_modal[key] + '"></div>' + minus + '</div>';
         $('.update-submit').before(html);
     });
 
+    $(document).on('click', '.remove', function(){
+        alert(100);
+    })
 
 });

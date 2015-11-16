@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from bson.objectid import ObjectId
-from django.http import HttpResponse
 from django.shortcuts import render_to_response, redirect
 from django.views.generic import View, ListView
 from django.template import RequestContext
 from django.core.paginator import Paginator
 
-from forms import BlockTradeForm
-from .models import BaseBlockTrade
+from program.forms import BlockTradeForm
+from program.models import BaseBlockTrade
 from eggs.utils.form import EmptyForm
 
 
@@ -60,8 +59,9 @@ class BlockTrade(ListView):
         form.pop('csrfmiddlewaretoken')
         pk = ObjectId(form.pop('id')[0])
         print pk
-        print form, form['y']
-        BaseBlockTrade(pk=pk).update(**{'y': form['y']})
+        print form
+        if form:
+            BaseBlockTrade(pk=pk).update(**form)
         return self.get(request)
 
 
