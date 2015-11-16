@@ -24,4 +24,8 @@ class BaseBlockTrade(Document):
     def __unicode__(self):
         return smart_unicode(self.sale)
 
+    def update(self, **kwargs):
+        print 'he update:', self.pk
+        super(BaseBlockTrade, self).update(**kwargs)
+
 

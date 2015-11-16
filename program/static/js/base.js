@@ -33,10 +33,8 @@ $(function(){
 
         var html = '<div class="form-group data-check"><label class="col-sm-3 control-label">'
                     + maps[key] +'：</label><div class="col-sm-9"><input type="text" class="form-control input-xs"'
-                    + ' name="secu" value="' + objects_modal[key] + '"></div></div>';
-        $('form.update').append(html);
-
-        console.log(objects_modal);
+                    + ' name="' + key + '" value="' + objects_modal[key] + '"></div></div>';
+        $('.update-submit').before(html);
     });
 
 

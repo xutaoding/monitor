@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
+from bson.objectid import ObjectId
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, redirect
 from django.views.generic import View, ListView
 from django.template import RequestContext
-from django.core.paginator import Paginator, EmptyPage, InvalidPage
+from django.core.paginator import Paginator
 
 from forms import BlockTradeForm
 from .models import BaseBlockTrade
 from eggs.utils.form import EmptyForm
-from eggs.utils.pagination import Serialization
 
 
 class Program(View):
@@ -55,29 +55,14 @@ class BlockTrade(ListView):
         )
         # return super(BlockTrade, self).get(request, *args, **kwargs)
 
-    # def post(self, request):
-    #     print request.POST.copy()
-    #     queries = self.trim_query_string(request.POST.copy())
-    #     page = int(queries.get('page', 1))
-    #
-    #     form = BlockTradeForm(queries)
-    #     objects_list = self.queryset(form)
-    #     paginator = Paginator(objects_list, self.objects_per)
-    #
-    #     try:
-    #         queryset = paginator.page(page)
-    #     except(EmptyPage, InvalidPage):
-    #         queryset = paginator.page(paginator.num_pages)
-    #
-    #     if 'csrfmiddlewaretoken' in queries:
-    #         return render_to_response(
-    #             self.template_name,
-    #             {'queryset': queryset, 'headers': self.headers, 'form': form, 'queries': queries, 'typ': 1},
-    #             context_instance=RequestContext(request),
-    #         )
-    #     else:
-    #         print queryset
-    #         return HttpResponse(Serialization(queryset, BaseBlockTrade).dumps())
+    def post(self, request):
+        form = request.POST.copy()
+        form.pop('csrfmiddlewaretoken')
+        pk = ObjectId(form.pop('id')[0])
+        print pk
+        print form, form['y']
+        BaseBlockTrade(pk=pk).update(**{'y': form['y']})
+        return self.get(request)
 
 
 class MarginTrade(ListView):
