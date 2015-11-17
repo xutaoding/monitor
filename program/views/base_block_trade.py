@@ -4,27 +4,20 @@ import re
 import json
 from bson.objectid import ObjectId
 from django.http.response import HttpResponse
-from django.views.generic import View, ListView
+from django.views.generic import ListView
 from django.template import RequestContext
 from django.core.paginator import Paginator
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response
 
 from program.forms import BlockTradeForm
 from program.models import BaseBlockTrade
 from eggs.utils.form import EmptyForm
 
 
-class ProgramView(View):
-    route = 'margin_trade/'
-
-    def get(self, request):
-        return redirect(self.route)
-
-
 class BlockTradeView(ListView):
     objects_per = 10
     objects_limit = 100
-    template_name = 'margin_trade.html'
+    template_name = 'block_trade.html'
 
     @staticmethod
     def trim_query_string(queries):
@@ -72,8 +65,3 @@ class BlockTradeView(ListView):
         BaseBlockTrade(pk=ObjectId(pk_regex.groupdict()['pk'])).delete()
         return HttpResponse(json.dumps({'msg': '删除成功!',  'success': True}))
 
-
-
-
-class HKStockAnnouncement(ListView):
-    pass

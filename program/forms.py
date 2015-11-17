@@ -14,5 +14,5 @@ class BlockTradeForm(forms.Form):
         keys = ['secu', 'y', 'typ', 'crt']
         new_data = {} if data is None else data.copy()
 
-        _ = [new_data.pop(key) for key in data or {} if key not in keys]
+        [new_data.pop(key) for key in data or {} if key not in keys]
         super(BlockTradeForm, self).__init__(new_data)

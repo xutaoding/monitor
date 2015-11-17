@@ -52,12 +52,35 @@ $(function(){
     })
 
     $('.ensure-delete').click(function(){
+        var csrftoken = $.cookie('csrftoken');
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+        console.log($(this).siblings('input.data-id').attr('value'));
         $.ajax({
             url: "/program/margin_trade/",
             data: {'id': $(this).siblings('input.data-id').attr('value')},
             type: "DELETE",
-            success: function(){
+            success: function(data){
+                var obj = JSON.parse(data);
+                $('#delete').modal('hide');
 
+                if (!obj.success){
+                    alert(obj.msg);
+                }
+
+                window.location.reload(); // Refresh the current web page
+                // window.location.href = '/..../' // Jump to the specified page
             }
         });
     });

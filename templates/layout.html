@@ -17,41 +17,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="navbar-header">
-                <a class="navbar-brand" href="{% url 'program:index' %}" style="margin:0 -1em 0 8em"><span>程序</span></a>
-                <a class="navbar-brand" href="" style="margin:0 -1em 0 4em"><span>新闻</span></a>
-                <a class="navbar-brand" href="" style="margin:0 -1em 0 4em"><span>外源</span></a>
-        </div>
-
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a>Profile</a></li>
-                <li><a href="#">登陆</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-3 col-md-2 sidebar">
-                {% block navigation %}{% endblock %}
-            </div>
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="width: 80%">
-            <h3 class="sub-header">
-                {% block header %}{% endblock %}
-            </h3>
-
-            {% block form %}{% endblock %}
-            <div class="table-responsive">
-                {% block content %}{% endblock %}
-            </div>
-
-             {% block pagination %}{% endblock %}
-        </div>
-      </div>
-    </div>
+    {% block content %}{% endblock %}
 
     <!-- Bootstrap core JavaScript -->
     <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
