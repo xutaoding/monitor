@@ -1,24 +1,27 @@
 # -*- coding: utf-8 -*-
 
+import re
+import json
 from bson.objectid import ObjectId
-from django.shortcuts import render_to_response, redirect
+from django.http.response import HttpResponse
 from django.views.generic import View, ListView
 from django.template import RequestContext
 from django.core.paginator import Paginator
+from django.shortcuts import render_to_response, redirect
 
 from program.forms import BlockTradeForm
 from program.models import BaseBlockTrade
 from eggs.utils.form import EmptyForm
 
 
-class Program(View):
+class ProgramView(View):
     route = 'margin_trade/'
 
     def get(self, request):
         return redirect(self.route)
 
 
-class BlockTrade(ListView):
+class BlockTradeView(ListView):
     objects_per = 10
     objects_limit = 100
     template_name = 'margin_trade.html'
@@ -53,35 +56,23 @@ class BlockTrade(ListView):
 
     def post(self, request):
         form = request.POST.copy()
-        form.pop('csrfmiddlewaretoken')
-        pk = ObjectId(form.pop('id')[0])
+        ignore_keys = ['csrfmiddlewaretoken', 'id']
+        update_data = dict([(k, v) for k, v in form.items() if k not in ignore_keys])
 
         if form:
-            BaseBlockTrade(pk=pk).update(**dict([(k, v) for k, v in form.items()]))
+            BaseBlockTrade(pk=ObjectId(form['id'])).update(**update_data)
         return self.get(request)
 
     def delete(self, request):
-        print request.POST
+        pk_regex = re.compile(r'id=(?P<pk>.+)').search(request.read())
+
+        if pk_regex is None:
+            return HttpResponse(json.dumps({'msg': '数据请求错误!', 'success': False}))
+
+        BaseBlockTrade(pk=ObjectId(pk_regex.groupdict()['pk'])).delete()
+        return HttpResponse(json.dumps({'msg': '删除成功!',  'success': True}))
 
 
-class MarginTrade(ListView):
-    pass
-
-
-class ExecutiveRegulation(ListView):
-    pass
-
-
-class AStockReport(ListView):
-    pass
-
-
-class HKStockReport(ListView):
-    pass
-
-
-class HKStockEquity(ListView):
-    pass
 
 
 class HKStockAnnouncement(ListView):

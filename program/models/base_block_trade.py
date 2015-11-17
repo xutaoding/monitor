@@ -25,7 +25,9 @@ class BaseBlockTrade(Document):
         return smart_unicode(self.sale)
 
     def update(self, **kwargs):
-        print 'he update:', self.pk
         super(BaseBlockTrade, self).update(**kwargs)
+
+    def delete(self, **write_concern):
+        super(BaseBlockTrade, self).delete(**write_concern)
 
 
