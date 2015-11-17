@@ -133,5 +133,5 @@ STATICFILES_DIRS = (
 
 # setting mongodb
 # connect('ada', host='192.168.250.200', port=27017)
-# connect('ada', host='localhost', port=27017)
-connect('ada', host='192.168.0.223', port=27017)
+connect('ada', host='localhost', port=27017)
+# connect('ada', host='192.168.0.223', port=27017)

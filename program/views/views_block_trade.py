@@ -38,11 +38,9 @@ class BlockTrade(ListView):
 
     def get(self, request, *args, **kwargs):
         form = self.trim_query_string(request.GET)
-        print form
         page = int(form.get('page')) if form.get('page') else 1
-        print 'page:', page
         form = BlockTradeForm(form)
-        print 'form:', form.data
+
         queryset = self.queryset(form)
         paginator = Paginator(queryset, self.objects_per)
         objects_list = paginator.page(page)
@@ -52,17 +50,18 @@ class BlockTrade(ListView):
             {'objects_list': objects_list, 'form': form},
             context_instance=RequestContext(request),
         )
-        # return super(BlockTrade, self).get(request, *args, **kwargs)
 
     def post(self, request):
         form = request.POST.copy()
         form.pop('csrfmiddlewaretoken')
         pk = ObjectId(form.pop('id')[0])
-        print pk
-        print form
+
         if form:
-            BaseBlockTrade(pk=pk).update(**form)
+            BaseBlockTrade(pk=pk).update(**dict([(k, v) for k, v in form.items()]))
         return self.get(request)
+
+    def delete(self, request):
+        print request.POST
 
 
 class MarginTrade(ListView):

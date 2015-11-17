@@ -3,25 +3,33 @@
 $(function(){
     $('[data-toggle="modal"]').click(function(){
         objects_modal = null;
-        objects_modal = {};
 
-        var data_id = $(this).attr('data-id');
+        var data_id = $(this).attr('data-id'),
             selector = $(this).attr('data-target');
+        objects_modal = {'id': data_id}
+        console.log(objects_modal);
 
-        if (selector == '#update'){
-            var keys = ['id', 'secu', 'y', 'price', 'volu', 'amou', 'disc', 'ratio', 'buy', 'sale', 'c.en', 'crt'];
+        var keys = ['no', 'secu', 'y', 'price', 'volu', 'amou', 'disc', 'ratio', 'buy', 'sale', 'c.en', 'crt'];
 
-            $('[data-id="' + data_id + '"] td').each(function(index){
-                if($(this).attr('class') != 'extra'){
-                    if (index == 0){
-                        objects_modal[keys[index]] = data_id;
-                    } else{
-                        objects_modal[keys[index]] = $(this).text().trim();
-                    }
-                }
-            });
-            console.log(objects_modal);
-            $(".data-id").val(objects_modal['id']);
+        $('[data-id="' + data_id + '"] td').each(function(index){
+            if($(this).attr('class') != 'extra'){
+                objects_modal[keys[index]] = $(this).text().trim();
+            }
+        });
+        console.log(objects_modal);
+        $(".data-id").val(objects_modal['id']);
+
+        if(selector == '#delete'){
+            var html = '',
+            maps = {'no': '序号', 'secu': '股票代码', 'y': '交易日期'};
+
+            for (attr in maps){
+                html += '<div class="form-group data-show"><label class="col-sm-3 control-label">' + maps[attr] + ': </label>' +
+                    '<div class="col-sm-8"><input class="form-control input-xs" type="text" value="' +
+                    objects_modal[attr] + '" disabled></div></div>';
+            }
+            $(selector + ' .modal-body .data-show').remove();
+            $('.fix-control').before(html);
         }
 
     });
@@ -40,7 +48,18 @@ $(function(){
     });
 
     $(document).on('click', '.remove', function(){
-        alert(100);
+        $(this).parent('.data-check').remove();
     })
+
+    $('.ensure-delete').click(function(){
+        $.ajax({
+            url: "/program/margin_trade/",
+            data: {'id': $(this).siblings('input.data-id').attr('value')},
+            type: "DELETE",
+            success: function(){
+
+            }
+        });
+    });
 
 });
