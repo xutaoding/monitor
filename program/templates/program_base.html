@@ -1,5 +1,10 @@
 {% extends "layout.html" %}
 
+{% block style %}
+    {% load static %}
+    <link href="{% static 'css/base.css' %}" type="text/css" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header">

@@ -5,3 +5,7 @@
 .input-box        {border:1px solid #dff0d8;margin-left: 1em}
 select.input-box            {width: 12%; height: 25px}
 .btn.btn-default.btn-sm     {background-color: #dff0d8; margin-left:2em}
+
+.sub-header         {border-bottom: 1px solid #dff0d8;}
+
+.panel              {width: 65%; height: 60%; margin: 8% 0 0 10%}

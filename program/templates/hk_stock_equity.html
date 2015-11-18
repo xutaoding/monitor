@@ -1,0 +1,95 @@
+{% extends "program_base.html" %}
+
+{% block title %} 港股股本 {% endblock %}
+
+{% block header %} <label>港股股本</label> {% endblock %}
+
+{% block table %}
+    <div class="panel panel-info">
+        <div class="panel-body">
+            <div class="form-horizontal" style="margin-top: 5%">
+                <div class="form-group">
+                    <label for="hk-stock" class="col-sm-3 control-label label-box">股票代码:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="hk-stock" placeholder="请输入公司代码" value="">
+                        <label for="hk-stock" class="col-sm-8 help-block label-box" style="margin: 5px 0 0 -10px">
+                            提示：请输入5尾数香港上市公司代码
+                        </label>
+                    </div>
+                </div>
+
+                 <div class="form-group" style="margin-top: 5%;">
+                     <!-- 由于不是通过点击来显示模态框，所以可以不要属性data-target="#stock-equity"-->
+                     <a class="btn  btn-info col-sm-2 stock-equity" style="margin-left:12.5%"
+                        data-toggle="modal" title="查询该代码是否在已有的配置文件中">查询代码</a>
+                     <a class="btn  btn-info col-sm-2 stock-equity" style="margin-left:12.5%"
+                        data-toggle="modal" title="将该代码添加到配置文件中">添加代码</a>
+                     <a class="btn  btn-info col-sm-2 stock-equity" style="margin-left:12.5%"
+                        data-toggle="modal" title="更新该公司的股本数量">更新股本</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal-->
+    <div class="modal fade" id="stock-equity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;
+                    </button>
+                    <h4 id="myModalLabel" style="text-align:center">操作</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group" style="margin-left: 45%;">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block script %}
+<script type="text/javascript">
+    $(function(){
+        $('.stock-equity').click(function(){
+            var method_obj = {0: 'GET', 1: 'POST', 2: 'PUT'};
+
+            var csrftoken = $.cookie('csrftoken');
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+
+            $.ajax({
+                url: "/program/stock_equity/",
+                data: {'code': $('#hk-stock').attr('value').trim()},
+                type: method_obj[$(this).index()],
+                success: function(data){
+                    var obj = JSON.parse(data);
+
+                    if (!obj.success){
+                        alert(obj.msg);
+                    }
+                    $('#stock-equity').modal('show');
+                }
+            });
+
+        });
+    });
+</script>
+{% endblock %}

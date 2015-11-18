@@ -68,7 +68,7 @@ $(function(){
 
         console.log($(this).siblings('input.data-id').attr('value'));
         $.ajax({
-            url: "/program/margin_trade/",
+            url: "/program/block_trade/",
             data: {'id': $(this).siblings('input.data-id').attr('value')},
             type: "DELETE",
             success: function(data){

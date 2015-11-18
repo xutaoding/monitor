@@ -1,12 +1,7 @@
 ﻿{% extends "program_base.html" %}
 
 <!--{% load program_extra %}-->
-
-{% block style %}
-    {% load static %}
-    <link href="{% static 'css/base.css' %}" type="text/css" rel="stylesheet">
-{% endblock %}
-
+{% load static %}
 {% block title %} 大宗交易 {% endblock %}
 
 {% block header %} <label>权益类与债券类大宗交易</label> {% endblock %}
@@ -153,7 +148,6 @@
                 <div class="modal-body form-horizontal">
 
                     <div class="form-group fix-control" style="margin-left: 35%">
-                        {% csrf_token %}
                         <input type="hidden" class="form-control data-id" name="id" value="">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
                         <button type="submit" class="btn btn-danger ensure-delete">确认删除</button>
@@ -171,7 +165,7 @@
 
 
 {% block script %}
-<script src="{% static 'js/base.js' %}"></script>
+<script src="{% static 'js/block_trade.js' %}"></script>
 <script type="text/javascript">
     $('.datepicker').click(function(){
         $(this).datepicker({
