@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'executive/$', views.ExecutiveRegulationView.as_view(), name='executive'),
     url(r'announcement/$', views.HKStockAnnouncementView.as_view(), name='announcement'),
     url(r'stock_equity/$', views.HKStockEquityView.as_view(), name='stock_equity'),
+    url(r'stock_equity/code/$', views.StockEquityCodeView.as_view(), name='stock_equity_code'),
     url(r'margin_trade/$', views.MarginTradeView.as_view(), name='margin_trade'),
     url(r'report/$', views.ReportView.as_view(), name='report'),
 ]

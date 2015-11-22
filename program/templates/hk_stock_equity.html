@@ -20,8 +20,8 @@
 
                  <div class="form-group" style="margin-top: 5%;">
                      <!-- 由于不是通过点击来显示模态框，所以可以不要属性data-target="#stock-equity"-->
-                     <a class="btn  btn-info col-sm-2 stock-equity" style="margin-left:12.5%"
-                        data-toggle="modal" title="查询该代码是否在已有的配置文件中">查询代码</a>
+                     <a class="btn  btn-info col-sm-2 stock-equity" style="margin-left:12.5%" data-toggle="modal"
+                        title="查询该代码是否在已有的配置文件中">查询代码</a>
                      <a class="btn  btn-info col-sm-2 stock-equity" style="margin-left:12.5%"
                         data-toggle="modal" title="将该代码添加到配置文件中">添加代码</a>
                      <a class="btn  btn-info col-sm-2 stock-equity" style="margin-left:12.5%"
@@ -44,6 +44,7 @@
                 </div>
 
                 <div class="modal-body">
+                    <div class="form-group msg-body" style="text-align: center"></div>
                     <div class="form-group" style="margin-left: 45%;">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
                     </div>
@@ -76,15 +77,19 @@
             });
 
             $.ajax({
-                url: "/program/stock_equity/",
-                data: {'code': $('#hk-stock').attr('value').trim()},
+                url: "/program/stock_equity/code/",
+                data: {'code': $('#hk-stock').val().trim()},
                 type: method_obj[$(this).index()],
                 success: function(data){
                     var obj = JSON.parse(data);
 
-                    if (!obj.success){
-                        alert(obj.msg);
+                    if (!obj.msg){
+                        window.location.href = '/program/stock_equity/';
+                        return 0;
                     }
+
+                    var html = '<h4>代码 ' + obj.code + ': ' + obj.msg + "</h4>";
+                    $('.msg-body').html(html);
                     $('#stock-equity').modal('show');
                 }
             });
