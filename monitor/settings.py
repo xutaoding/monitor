@@ -39,6 +39,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+
+    # custom youself user
+    # 'mongoengine.django.mongo_auth',
+
     'program',
 )
 
@@ -100,6 +104,11 @@ DATABASES = {
     # }
 }
 
+# AUTH_USER_MODEL = 'mongo_auth.MongoUser'
+# SESSION_ENGINE = 'mongoengine.django.sessions'
+MONGOENGINE_USER_DOCUMENT = 'mongoengine.django.auth.User'
+AUTHENTICATION_BACKENDS = ('mongoengine.django.auth.MongoEngineBackend', )
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -133,5 +142,5 @@ STATICFILES_DIRS = (
 
 # setting mongodb
 # connect('ada', host='192.168.250.200', port=27017)
-connect('ada', host='localhost', port=27017)
-# connect('ada', host='192.168.0.223', port=27017)
+# connect('ada', host='localhost', port=27017)
+connect('ada', host='192.168.0.223', port=27017)

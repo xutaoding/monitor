@@ -1,3 +1,4 @@
 dajngo==1.8.5
 pymongo==2.6.2
+mongoengine==0.9
 # pagination==1.0.7
