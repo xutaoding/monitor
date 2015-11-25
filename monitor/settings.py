@@ -98,14 +98,14 @@ DATABASES = {
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # }
 
-    # 'default': {
-    #     'ENGINE': 'django_mongodb_engine',
-    #     'NAME': 'ada',
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.dummy',
+        # 'NAME': 'ada',
+    }
 }
 
 # AUTH_USER_MODEL = 'mongo_auth.MongoUser'
-# SESSION_ENGINE = 'mongoengine.django.sessions'
+SESSION_ENGINE = 'mongoengine.django.sessions'
 MONGOENGINE_USER_DOCUMENT = 'mongoengine.django.auth.User'
 AUTHENTICATION_BACKENDS = ('mongoengine.django.auth.MongoEngineBackend', )
 
