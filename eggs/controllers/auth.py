@@ -4,7 +4,6 @@ from mongoengine.django.auth import User
 from django.contrib.auth import authenticate
 
 
-
 def login(request):
     template_name = 'login.html'
 
@@ -12,4 +11,3 @@ def login(request):
         template_name=template_name,
         context_instance=RequestContext(request)
     )
-
