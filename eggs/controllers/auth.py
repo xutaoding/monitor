@@ -1,5 +1,6 @@
 from django.template import RequestContext
 from django.shortcuts import render_to_response
+# from django.contrib.auth.models import User
 from mongoengine.django.auth import User
 from django.contrib.auth import authenticate
 
